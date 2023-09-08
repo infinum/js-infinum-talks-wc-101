@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Counter Web Component</title>
+		<style>
+			body {
+				font-family: sans-serif;
+			}
+
+			.counters {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+			}
+
+			section {
+				flex: 1;
+			}
+
+			.log {
+				padding: 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Counter Web Component</h1>
+
+		<div class="counters">
+			<section>
+				<my-counter></my-counter>
+				<div class="log" id="log1">Log:<br /></div>
+			</section>
+
+			<section>
+				<my-counter min="10"></my-counter>
+				<div class="log" id="log2">Log:<br /></div>
+			</section>
+
+			<section>
+				<my-counter count="42"></my-counter>
+				<div class="log" id="log3">Log:<br /></div>
+			</section>
+		</div>
+
+		<script src="counter.js"></script>
+
+		<script>
+			document.querySelectorAll('my-counter').forEach((counter, i) => {
+				counter.addEventListener('change', (event) => {
+					document.getElementById(
+						`log${i + 1}`
+					).innerHTML += `${event.detail} `;
+					console.log('change', event.detail, event.target);
+				});
+			});
+		</script>
+	</body>
+</html>

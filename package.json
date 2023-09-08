@@ -1,11 +1,21 @@
 {
-  "name": "js-infinum-talks-wc-101",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Infinum",
-  "license": "MIT"
+	"name": "js-infinum-talks-wc-101",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "browser-sync src --files src",
+		"prepare": "husky install"
+	},
+	"author": "Infinum",
+	"license": "MIT",
+	"devDependencies": {
+		"http-server": "^14.1.1",
+		"husky": "^8.0.3",
+		"lint-staged": "^14.0.1",
+		"prettier": "3.0.3"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	}
 }
