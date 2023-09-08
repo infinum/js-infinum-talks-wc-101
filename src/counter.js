@@ -1,6 +1,6 @@
 class Counter extends HTMLElement {
 	static #idCounter = 0;
-	#idPrefix = `my-counter-${Counter.#idCounter++}`;
+	#idPrefix = `my-counter-${Counter.#idCounter++}-`;
 	#decrementElementId = `${this.#idPrefix}decrement`;
 	#incrementElementId = `${this.#idPrefix}increment`;
 	#countElementId = `${this.#idPrefix}count`;
