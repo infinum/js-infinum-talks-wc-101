@@ -15,45 +15,45 @@ class Counter extends HTMLElement {
 
 	connectedCallback() {
 		this.#shadow.innerHTML = `
-      <style>
-        :host {
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
+			<style>
+				:host {
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					gap: 8px;
+					
+					padding: 8px;
+					border: 1px solid #ccc;
+					border-radius: 8px;
 
-          user-select: none;
-        }
+					user-select: none;
+				}
 
-        button {
-          border: none;
-          background: #333;
-          border-radius: 4px;
-          width: 48px;
-          height: 48px;
-          color: #eee;
-          font-size: 32px;
-          line-height: 32px;
-          cursor: pointer;
-        }
+				button {
+					border: none;
+					background: #333;
+					border-radius: 4px;
+					width: 48px;
+					height: 48px;
+					color: #eee;
+					font-size: 32px;
+					line-height: 32px;
+					cursor: pointer;
+				}
 
-        span {
-          font-size: 32px;
-          line-height: 32px;
-          font-weight: bold;
-          min-width: 64px;
-          text-align: center;
-        }
-      </style>
+				span {
+					font-size: 32px;
+					line-height: 32px;
+					font-weight: bold;
+					min-width: 64px;
+					text-align: center;
+				}
+			</style>
 
-      <button id="${this.#decrementElementId}" type="button">-</button>
-      <span id="${this.#countElementId}">${this.count}</span>
-      <button id="${this.#incrementElementId}" type="button">+</button>
-    `;
+			<button id="${this.#decrementElementId}" type="button">-</button>
+			<span id="${this.#countElementId}">${this.count}</span>
+			<button id="${this.#incrementElementId}" type="button">+</button>
+		`;
 
 		const decrementElement = this.#shadow.getElementById(
 			this.#decrementElementId
