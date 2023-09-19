@@ -8,7 +8,11 @@
 		<script>
 			class MyCounter extends HTMLElement {
 				#value = 0;
-				#shadow = this.attachShadow({ mode: 'closed' });
+				#shadow = this.attachShadow({ mode: 'open' });
+
+				get value() {
+					return this.#value;
+				}
 
 				static get observedAttributes() {
 					return ['value'];
@@ -54,12 +58,23 @@
 					incElement.addEventListener('click', () => {
 						this.#value++;
 						this.#render();
+						this.#emitChangeEvent();
 					});
 
 					decElement.addEventListener('click', () => {
 						this.#value--;
 						this.#render();
+						this.#emitChangeEvent();
 					});
+				}
+
+				#emitChangeEvent() {
+					this.dispatchEvent(
+						new CustomEvent('change', {
+							detail: this.#value,
+							bubbles: true,
+						})
+					);
 				}
 
 				#render() {
