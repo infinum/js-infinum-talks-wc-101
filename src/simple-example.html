@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<script>
+			class MyCounter extends HTMLElement {
+				#value = 0;
+				#shadow = this.attachShadow({ mode: 'closed' });
+
+				static get observedAttributes() {
+					return ['value'];
+				}
+
+				attributeChangedCallback(propName, oldValue, newValue) {
+					if (propName === 'value') {
+						this.#value = parseInt(newValue, 10);
+						this.#render();
+					}
+				}
+
+				connectedCallback() {
+					this.#shadow.innerHTML = `
+					<button id="dec">-</button>
+
+					<span id="count">${this.#value}</span>
+					<button id="inc">+</button>
+
+						<style>
+							:host {
+								display: inline-flex;
+								justify-content: center;
+								align-items: center;
+								border: 2px solid black;
+								border-radius: 8px;
+								padding: 10px;
+								font-size: 2rem;
+							}
+
+							button {
+								cursor: pointer;
+								border: none;
+								background: none;
+							}
+						</style>
+					`;
+
+					const incElement = this.#shadow.querySelector('#inc');
+					const decElement = this.#shadow.querySelector('#dec');
+					const countElement = this.#shadow.querySelector('#count');
+
+					incElement.addEventListener('click', () => {
+						this.#value++;
+						this.#render();
+					});
+
+					decElement.addEventListener('click', () => {
+						this.#value--;
+						this.#render();
+					});
+				}
+
+				#render() {
+					const countElement = this.#shadow.querySelector('#count');
+					if (!countElement) return;
+
+					countElement.innerText = this.#value;
+				}
+			}
+
+			customElements.define('my-counter', MyCounter);
+		</script>
+	</head>
+
+	<body>
+		<my-counter></my-counter>
+		<my-counter value="10"></my-counter>
+		<my-counter></my-counter>
+
+		<hr />
+
+		<span>Example</span>
+		<button>Click</button>
+	</body>
+</html>
